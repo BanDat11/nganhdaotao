@@ -22,6 +22,43 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes floatBackground {
+  0% {
+    transform: translate3d(-2%, -1%, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(2%, 1%, 0) rotate(2deg);
+  }
+
+  100% {
+    transform: translate3d(-2%, -1%, 0) rotate(0deg);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(255, 159, 28, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 159, 28, 0.12);
+  }
+}
+
 body {
   margin: 0;
   color: var(--ink);
@@ -286,6 +323,7 @@ a {
 .uth-bg::after {
   transform: translateX(18%) rotate(8deg);
   opacity: 0.65;
+  animation: floatBackground 18s ease-in-out infinite;
 }
 
 .hero {
@@ -305,6 +343,7 @@ a {
 .hero-content {
   max-width: 850px;
   align-self: center;
+  animation: fadeSlideUp 0.9s ease both;
 }
 
 .eyebrow {
@@ -397,6 +436,14 @@ h3 {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   backdrop-filter: blur(10px);
+  transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+}
+
+.hero-stats article:hover,
+.campus-grid article:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
 .hero-stats strong,
@@ -426,6 +473,17 @@ h3 {
   margin: 0 auto;
 }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .split {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
@@ -449,6 +507,12 @@ h3 {
   border-top: 5px solid var(--uth-orange);
   border-radius: 8px;
   box-shadow: var(--shadow);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 46px rgba(0, 83, 81, 0.18);
 }
 
 .info-card ul {
@@ -473,6 +537,13 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: 0 10px 26px rgba(0, 83, 81, 0.08);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 159, 28, 0.55);
+  box-shadow: 0 22px 42px rgba(0, 83, 81, 0.16);
 }
 
 .feature-icon {
@@ -485,6 +556,12 @@ h3 {
   background: var(--uth-teal);
   border-radius: 6px;
   font-weight: 900;
+  transition: background 0.28s ease, transform 0.28s ease;
+}
+
+.feature-card:hover .feature-icon {
+  background: var(--uth-orange);
+  transform: rotate(-3deg) scale(1.05);
 }
 
 .section-heading {
@@ -518,6 +595,7 @@ h3 {
 .tab-button.active {
   color: #ffffff;
   background: var(--uth-teal);
+  animation: softPulse 1.2s ease;
 }
 
 .tab-panel {
@@ -526,6 +604,7 @@ h3 {
 
 .tab-panel.active {
   display: block;
+  animation: fadeSlideUp 0.38s ease both;
 }
 
 .timeline {
@@ -541,6 +620,12 @@ h3 {
   border-left: 5px solid var(--uth-orange);
   border-radius: 8px;
   box-shadow: 0 12px 28px rgba(0, 83, 81, 0.08);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.timeline article:hover {
+  transform: translateX(6px);
+  box-shadow: 0 20px 38px rgba(0, 83, 81, 0.14);
 }
 
 .timeline span {
@@ -571,12 +656,19 @@ h3 {
   cursor: pointer;
   font: inherit;
   font-weight: 800;
+  transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease;
+}
+
+.career-item:hover {
+  transform: translateX(5px);
+  color: var(--uth-teal);
 }
 
 .career-item.active {
   color: #ffffff;
   background: var(--uth-teal);
   border-color: var(--uth-teal);
+  transform: translateX(5px);
 }
 
 .career-tags {
@@ -594,6 +686,7 @@ h3 {
   background: var(--uth-teal-soft);
   border-radius: 6px;
   font-weight: 800;
+  animation: fadeSlideUp 0.35s ease both;
 }
 
 .campus {
@@ -671,6 +764,13 @@ h3 {
   border-radius: 999px;
   color: #ffffff;
   font-weight: 800;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.campus-grid a:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.58);
 }
 
 .site-footer {

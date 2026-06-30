@@ -8,6 +8,9 @@ const careerDesc = document.querySelector("#career-desc");
 const careerTags = document.querySelector("#career-tags");
 const contactForm = document.querySelector(".contact-form");
 const formMessage = document.querySelector(".form-message");
+const revealItems = document.querySelectorAll(
+  ".section-inner, .feature-card, .timeline article, .career-board, .campus-grid article"
+);
 
 const careerContent = {
   dev: {
@@ -93,4 +96,28 @@ if (contactForm && formMessage) {
     formMessage.textContent = `${name}, nhà trường sẽ liên hệ tư vấn về nhóm ${interest}.`;
     contactForm.reset();
   });
+}
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.16
+    }
+  );
+
+  revealItems.forEach((item, index) => {
+    item.classList.add("reveal");
+    item.style.transitionDelay = `${Math.min(index % 4, 3) * 80}ms`;
+    revealObserver.observe(item);
+  });
+} else {
+  revealItems.forEach((item) => item.classList.add("visible"));
 }
