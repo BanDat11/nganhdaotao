@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngành Kinh tế biển - UTH</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 32px;
+    }
+
+    .reason-card {
+      background: var(--paper);
+      padding: 28px;
+      border-radius: 12px;
+      border-top: 4px solid var(--uth-orange);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 107, 104, 0.12);
+    }
+
+    .reason-card h3 {
+      color: var(--uth-teal-dark);
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .reason-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .sea-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .sea-card {
+      background: linear-gradient(135deg, #e6f4f3 0%, #fff 100%);
+      padding: 32px 24px;
+      border-radius: 12px;
+      border-left: 4px solid var(--uth-teal);
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .sea-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 107, 104, 0.15);
+    }
+
+    .sea-card h3 {
+      color: var(--uth-teal);
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .sea-card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .jobs-section {
+      margin-top: 48px;
+    }
+
+    .job-category {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: var(--soft);
+      border-radius: 8px;
+      border-top: 3px solid var(--uth-orange);
+    }
+
+    .job-category h3 {
+      color: var(--uth-teal-dark);
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+    }
+
+    .job-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .job-item {
+      background: var(--paper);
+      padding: 12px 16px;
+      border-radius: 6px;
+      border-left: 3px solid var(--uth-orange);
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
+    .highlight-box {
+      background: #ffffff;
+      color: var(--ink);
+      padding: 48px;
+      border-radius: 12px;
+      margin-top: 48px;
+      text-align: center;
+      border: 2px solid var(--uth-teal);
+      box-shadow: 0 8px 24px rgba(0, 107, 104, 0.1);
+    }
+
+    .highlight-box h3 {
+      font-size: 1.8rem;
+      margin: 0 0 20px 0;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--uth-teal-dark);
+    }
+
+    .highlight-box p {
+      line-height: 1.9;
+      font-size: 1.1rem;
+      margin: 0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.3px;
+      color: var(--muted);
+    }
+
+    .highlight-strong {
+      font-weight: 700;
+      color: var(--uth-teal);
+      background: #e6f4f3;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .quote-section {
+      margin: 40px 0;
+      padding: 24px;
+      border-left: 4px solid var(--uth-orange);
+      background: #fff9f4;
+      border-radius: 8px;
+    }
+
+    .quote-section p {
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .main-nav a {
+      position: relative;
+      padding-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--uth-teal);
+      transition: width 0.3s ease;
+    }
+
+    .main-nav a:hover::after,
+    .main-nav a.active::after {
+      width: 100%;
+    }
+
+    .main-nav a.active {
+      color: var(--uth-teal);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <p><span class="bell-icon" aria-hidden="true"></span> Chào mừng đến với Trường Đại học Giao thông Vận tải TP.HCM - UTH</p>
+    <div class="top-actions">
+      <div class="top-contact">
+        <span><span class="top-icon">☎</span> 028 3512 8986</span>
+        <span><span class="top-icon">✉</span> ut-hcmc@ut.edu.vn</span>
+      </div>
+      <div class="social-links" aria-label="Mạng xã hội">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="TikTok">♪</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#hero" aria-label="Trường Đại học Giao thông Vận tải TP.HCM">
+      <img src="../Logo_UTH.png" alt="Logo UTH">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Giới thiệu</a>
+      <a href="https://uttest.ut.edu.vn/tuyen-sinh" class="active">Tuyển sinh</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Đào tạo</a>
+      <a href="https://uttest.ut.edu.vn/khoa-hoc-cong-nghe">Khoa học - Công nghệ</a>
+      <a href="https://uttest.ut.edu.vn/hop-tac-quoc-te">Hợp tác quốc tế</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Quản trị đại học</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Ban chuyên môn</a>
+    </nav>
+    <button class="menu-button" type="button" aria-label="Mở menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="header-tools">
+      <button class="search-button" type="button" aria-label="Tìm kiếm"></button>
+      <div class="language-switch" aria-label="Chọn ngôn ngữ">
+        <a class="active" href="#">VN</a>
+        <a href="#">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero uth-bg" id="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Khoa Vận tải biển</p>
+        <h1>Ngành Kinh tế biển</h1>
+        <p class="hero-lead">
+          Kinh tế biển là động lực tăng trưởng quan trọng của Việt Nam với 3.260km đường bờ biển.
+          Hệ thống cảng biển, logistics, năng lượng tái tạo ngoài khơi, du lịch biển và công nghiệp ven biển 
+          đang "khát" nhân lực chất lượng cao, có tư duy liên ngành và khả năng thích ứng quốc tế.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#programs">Xem chương trình</a>
+          <a class="secondary-action" href="#career">Cơ hội việc làm</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <article>
+          <strong>4 năm</strong>
+          <span>Thời gian đào tạo</span>
+        </article>
+        <article>
+          <strong>Cử nhân</strong>
+          <span>Bằng cấp</span>
+        </article>
+        <article>
+          <strong>Thực tiễn doanh nghiệp</strong>
+          <span>Định hướng học tập</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section intro-section" id="overview">
+      <div class="section-inner">
+        <p class="eyebrow">Về chương trình</p>
+        <h2>Kinh tế biển tại UTH</h2>
+        <p style="font-size: 1.05rem; color: var(--muted); margin-bottom: 24px;">
+          Chương trình đào tạo Kinh tế biển tại UTH được xây dựng theo định hướng đào tạo hiện đại, 
+          gắn chặt giữa kiến thức kinh tế, quản trị với thực tiễn khai thác và phát triển kinh tế biển.
+        </p>
+
+        <div class="quote-section">
+          <p>
+            💡 <strong>Điểm nổi bật:</strong> Sinh viên có cơ hội tham gia học kỳ doanh nghiệp, 
+            thực tập tại cảng biển, doanh nghiệp logistics, khu công nghiệp ven biển và các đơn vị 
+            hoạt động trong lĩnh vực kinh tế biển. Qua đó, người học được tiếp cận trực tiếp 
+            môi trường làm việc thực tế ngay từ khi còn trên giảng đường.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="section-inner">
+        <p class="eyebrow">Tại sao chọn Kinh tế biển?</p>
+        <h2>Những lý do nên chọn ngành</h2>
+        
+        <div class="reason-grid">
+          <div class="reason-card">
+            <h3>📈 Nhu cầu nhân lực cao</h3>
+            <p>
+              Nền kinh tế biển Việt Nam đang phát triển mạnh mẽ, mở ra cơ hội việc làm rộng mở 
+              cho cử nhân kinh tế biển tại các doanh nghiệp hàng đầu trong nước và quốc tế.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h3>🌍 Tư duy liên ngành & quốc tế</h3>
+            <p>
+              Học tập theo định hướng hiện đại, tiếp cận kiến thức từ logistics quốc tế, du lịch bền vững, 
+              năng lượng xanh và công nghiệp tiên tiến đang phát triển trên toàn thế giới.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h3>💼 Học kỳ doanh nghiệp & thực tập</h3>
+            <p>
+              Cơ hội tham gia học kỳ doanh nghiệp, thực tập tại cảng biển, doanh nghiệp logistics 
+              và khu công nghiệp ven biển hàng đầu ngay trong quá trình học tập.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h3>🚀 Tương lai phát triển bền vững</h3>
+            <p>
+              Kinh tế biển xanh và bền vững là xu hướng toàn cầu, tạo ra cơ hội sự nghiệp lâu dài 
+              trong lĩnh vực năng lượng tái tạo, du lịch sinh thái và quản lý tài nguyên biển.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="programs">
+      <div class="section-inner">
+        <p class="eyebrow">Chương trình tập trung vào 4 lĩnh vực</p>
+        <h2>Các lĩnh vực chuyên sâu</h2>
+        
+        <div class="sea-grid">
+          <div class="sea-card">
+            <h3>⚓ Kinh tế hàng hải & Logistics</h3>
+            <p>
+              Sinh viên được trang bị kiến thức về khai thác cảng biển, vận tải biển, quản trị logistics 
+              và chuỗi cung ứng quốc tế – những lĩnh vực đóng vai trò then chốt trong kết nối thương mại 
+              toàn cầu và phát triển kinh tế biển hiện đại.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <h3>🏖 Du lịch & Dịch vụ biển</h3>
+            <p>
+              Chương trình cung cấp nền tảng để phát triển các sản phẩm du lịch sinh thái, nghỉ dưỡng 
+              và dịch vụ biển chất lượng cao, hướng đến xu thế du lịch xanh và bền vững.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <h3>💨 Năng lượng tái tạo</h3>
+            <p>
+              Sinh viên được tiếp cận các xu hướng phát triển mới như điện gió ngoài khơi, điện mặt trời 
+              trên biển, kinh tế xanh và chuyển đổi năng lượng – những lĩnh vực đang được ưu tiên phát triển 
+              tại Việt Nam và thế giới.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <h3>🏭 Công nghiệp ven biển & Chuỗi cung ứng</h3>
+            <p>
+              Người học được đào tạo kiến thức về quy hoạch, vận hành khu công nghiệp ven biển, 
+              quản trị chuỗi cung ứng tích hợp giữa sản xuất – chế biến – phân phối theo hướng hiện đại 
+              và thân thiện môi trường.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="career">
+      <div class="section-inner">
+        <p class="eyebrow">Tương lai sáng</p>
+        <h2>Cơ hội việc làm rộng mở</h2>
+        
+        <p style="font-size: 1.05rem; color: var(--muted); margin-bottom: 32px;">
+          Tốt nghiệp chuyên ngành Kinh tế biển, sinh viên có nhiều cơ hội làm việc trong các lĩnh vực 
+          đang phát triển mạnh của nền kinh tế biển Việt Nam và quốc tế.
+        </p>
+
+        <div class="jobs-section">
+          <div class="job-category">
+            <h3>📦 Lĩnh vực Hàng hải & Logistics</h3>
+            <div class="job-list">
+              <div class="job-item">Chuyên viên khai thác cảng biển</div>
+              <div class="job-item">Điều phối vận tải biển</div>
+              <div class="job-item">Quản lý logistics & chuỗi cung ứng</div>
+              <div class="job-item">Chuyên viên xuất nhập khẩu</div>
+              <div class="job-item">Nhân sự tại hãng tàu</div>
+              <div class="job-item">Doanh nghiệp logistics</div>
+              <div class="job-item">Trung tâm phân phối</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>🏨 Lĩnh vực Du lịch & Dịch vụ biển</h3>
+            <div class="job-list">
+              <div class="job-item">Khu nghỉ dưỡng & du lịch ven biển</div>
+              <div class="job-item">Công ty lữ hành quốc tế</div>
+              <div class="job-item">Phát triển sản phẩm du lịch biển</div>
+              <div class="job-item">Xúc tiến du lịch & dịch vụ hàng hải</div>
+              <div class="job-item">Dịch vụ du lịch sinh thái</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>⚡ Lĩnh vực Năng lượng tái tạo</h3>
+            <div class="job-list">
+              <div class="job-item">Dự án điện gió ngoài khơi</div>
+              <div class="job-item">Điện mặt trời ven biển</div>
+              <div class="job-item">Doanh nghiệp năng lượng xanh</div>
+              <div class="job-item">Dự án chuyển đổi năng lượng</div>
+              <div class="job-item">Phát triển bền vững</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>🏗️ Lĩnh vực Công nghiệp ven biển & Khác</h3>
+            <div class="job-list">
+              <div class="job-item">Khu công nghiệp ven biển</div>
+              <div class="job-item">Sản xuất & chế biến xuất khẩu</div>
+              <div class="job-item">Tập đoàn vận tải & chuỗi cung ứng</div>
+              <div class="job-item">Cơ quan quản lý nhà nước</div>
+              <div class="job-item">Viện nghiên cứu & đào tạo</div>
+              <div class="job-item">Tổ chức quốc tế</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h3>Tạo lập tương lai của nền kinh tế biển</h3>
+          <p>
+            Với nền tảng kiến thức <span class="highlight-strong">liên ngành</span>, 
+            tư duy <span class="highlight-strong">hội nhập</span> và kỹ năng <span class="highlight-strong">thực tiễn</span>, 
+            cử nhân Kinh tế biển UTH được kỳ vọng trở thành nguồn nhân lực quan trọng 
+            trong chiến lược đưa Việt Nam trở thành <span class="highlight-strong">quốc gia mạnh về biển</span> trong tương lai.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="campus uth-bg" id="campus">
+      <div class="campus-inner">
+        <div class="school-info">
+          <img src="../Logo_UTH.png" alt="Logo UTH">
+          <h2>Trường Đại học Giao thông Vận tải TP.HCM</h2>
+          <ul>
+            <li><strong>Cơ sở 1:</strong> Số 2, đường Võ Oanh, P. Thạnh Mỹ Tây, TP. HCM</li>
+            <li><strong>Tuyển sinh:</strong> 028 3512 8986</li>
+            <li><strong>Văn thư:</strong> 028 3899 1373</li>
+            <li><strong>Phòng Đào tạo:</strong> 0283 899 2862</li>
+            <li><strong>Email:</strong> ut-hcmc@ut.edu.vn</li>
+          </ul>
+        </div>
+
+        <div class="campus-list">
+          <p class="eyebrow">Các cơ sở đào tạo</p>
+          <h2>Các cơ sở đào tạo</h2>
+          <div class="campus-grid">
+            <article>
+              <h3>Giảng đường An Khánh</h3>
+              <p>Số 10, Đường số 12, P. An Khánh, TP. Thủ Đức, TP.HCM</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Giảng đường Quận 12</h3>
+              <p>Số 70, Đường Tô Ký, P. Trung Mỹ Tây, Quận 12, TP.HCM</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Giảng đường Vũng Tàu</h3>
+              <p>Số 17, Đường 3 tháng 2, P. Phước Thắng, TP. Vũng Tàu</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Cơ sở 2 - Đồng Nai</h3>
+              <p>Xã Bình An, Huyện Long Thành, Tỉnh Đồng Nai</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Copyright 2026 Trường Đại học Giao thông Vận tải TP.HCM - UTH</p>
+    <div class="footer-social" aria-label="Mạng xã hội">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">◎</a>
+      <a href="#" aria-label="Twitter">t</a>
+      <a href="#" aria-label="LinkedIn">in</a>
+    </div>
+    <a class="back-to-top" href="#hero" aria-label="Lên đầu trang">
+    <svg class="btt-progress" viewBox="0 0 60 60" aria-hidden="true">
+      <circle class="btt-progress-track" cx="30" cy="30" r="27"></circle>
+      <circle class="btt-progress-bar" cx="30" cy="30" r="27"></circle>
+    </svg>
+    <svg class="btt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 15 12 9 18 15"></polyline>
+      <polyline points="6 11 12 5 18 11"></polyline>
+    </svg>
+    <span class="btt-blob" aria-hidden="true"></span>
+  </a>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
