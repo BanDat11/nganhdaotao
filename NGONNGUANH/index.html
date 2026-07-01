@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngành Ngôn ngữ Anh - UTH</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero .hero-lead {
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      margin-bottom: 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--uth-teal-dark);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0, 83, 81, 0.18);
+      border-radius: 999px;
+    }
+
+    .hero-badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--uth-orange);
+      border-radius: 50%;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    /* --- Quote / thesis strip --- */
+    .thesis-strip {
+      position: relative;
+      padding: 46px 0;
+      background: linear-gradient(120deg, var(--uth-teal-dark), var(--uth-teal));
+      overflow: hidden;
+    }
+
+    .thesis-strip::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 159, 67, 0.25), transparent 70%);
+    }
+
+    .thesis-inner {
+      position: relative;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .thesis-inner p {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.32rem;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    .thesis-inner span {
+      display: block;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* --- Program cards --- */
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .program-card {
+      position: relative;
+      padding: 28px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(0, 83, 81, 0.08);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .program-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 36px rgba(0, 83, 81, 0.14);
+    }
+
+    .program-card .icon-box {
+      display: inline-grid;
+      width: 54px;
+      height: 54px;
+      place-items: center;
+      margin-bottom: 18px;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--uth-teal), var(--uth-orange));
+      border-radius: 10px;
+      font-size: 1.5rem;
+      animation: floatSoft 3.2s ease-in-out infinite;
+    }
+
+    .program-card h3 {
+      color: var(--uth-teal-dark);
+      margin-bottom: 10px;
+      font-size: 1.12rem;
+    }
+
+    .program-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    /* --- Career cards --- */
+    .career-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .career-card {
+      padding: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--uth-orange);
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(0, 83, 81, 0.07);
+      transition: transform 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .career-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px rgba(0, 83, 81, 0.12);
+    }
+
+    .career-card h3 {
+      color: var(--uth-teal-dark);
+      margin-bottom: 10px;
+      font-size: 1.02rem;
+    }
+
+    .career-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* --- Stat pills inside intro --- */
+    .stat-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .stat-pill {
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--uth-teal-dark);
+      background: rgba(0, 83, 81, 0.06);
+      border-radius: 999px;
+    }
+
+    @media (max-width: 980px) {
+      .feature-grid,
+      .career-grid,
+      .program-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .thesis-inner p { font-size: 1.12rem; }
+    }
+
+    @media (max-width: 640px) {
+      .feature-grid,
+      .career-grid,
+      .program-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <p><span class="bell-icon" aria-hidden="true"></span> Chào mừng đến với Trường Đại học Giao thông vận tải TP.HCM - UTH</p>
+    <div class="top-actions">
+      <div class="top-contact">
+        <span><span class="top-icon">☎</span> 028 3512 8986</span>
+        <span><span class="top-icon">✉</span> ut-hcmc@ut.edu.vn</span>
+      </div>
+      <div class="social-links" aria-label="Mạng xã hội">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="TikTok">♪</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#hero" aria-label="Trường Đại học Giao thông vận tải TP.HCM">
+      <img src="../Logo_UTH.png" alt="Logo UTH">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Giới thiệu</a>
+      <a href="https://uttest.ut.edu.vn/tuyen-sinh" class="active">Tuyển sinh</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Đào tạo</a>
+      <a href="https://uttest.ut.edu.vn/khoa-hoc-cong-nghe">Khoa học công nghệ</a>
+      <a href="https://uttest.ut.edu.vn/hop-tac-quoc-te">Hợp tác quốc tế</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Ban Giám hiệu</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Hội đồng chuyên môn</a>
+    </nav>
+    <button class="menu-button" type="button" aria-label="Mở menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="header-tools">
+      <button class="search-button" type="button" aria-label="Tìm kiếm"></button>
+      <div class="language-switch" aria-label="Chuyển ngôn ngữ">
+        <a class="active" href="#">VN</a>
+        <a href="#">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero uth-bg" id="hero">
+      <div class="hero-content">
+        <span class="hero-badge">Khoa Ngoại ngữ</span>
+        <p class="eyebrow">Ngành tuyển sinh</p>
+        <h1>Ngôn ngữ Anh</h1>
+        <p class="hero-lead">
+          Trong xu thế hội nhập toàn cầu, cơ hội nghề nghiệp của cử nhân Ngôn ngữ Anh ngày càng rộng mở khi sinh viên nắm trong tay công cụ đắc lực nhất: Tiếng Anh. Đây là ngành học có nhu cầu nhân lực cao, mở ra nhiều cơ hội việc làm với mức thu nhập hấp dẫn.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#program">Khám phá chương trình</a>
+          <a class="secondary-action" href="#career">Cơ hội nghề nghiệp</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <article>
+          <strong>4 năm</strong>
+          <span>Thời gian đào tạo</span>
+        </article>
+        <article>
+          <strong>Cử nhân</strong>
+          <span>Văn bằng nhận được</span>
+        </article>
+        <article>
+          <strong>Giao tiếp toàn cầu</strong>
+          <span>Thế mạnh cốt lõi</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section intro-section" id="overview">
+      <div class="section-inner split">
+        <div>
+          <p class="eyebrow">Vì sao chọn Ngôn ngữ Anh?</p>
+          <h2>Tiếng Anh - lời giải cho bài toán nhân lực hội nhập</h2>
+          <p>
+            Sinh viên ngành Ngôn ngữ Anh với hành trang kiến thức, kỹ năng và nghiệp vụ vững vàng sẽ có nhiều cơ hội tham gia vào đa dạng lĩnh vực nghề nghiệp, làm việc tại các công ty trong nước lẫn doanh nghiệp có yếu tố nước ngoài. Nhu cầu nhân lực cho lĩnh vực này ngày càng phổ biến và được ưa chuộng.
+          </p>
+          <p>
+            UTH - ngôi trường luôn cập nhật các xu hướng giáo dục mới nhất và đề cao sứ mệnh đào tạo nguồn nhân lực chất lượng cao - mang đến chương trình Ngôn ngữ Anh giúp người học không chỉ "biết tiếng Anh" mà tiến tới khả năng "làm việc bằng tiếng Anh", tự tin hội nhập trong môi trường quốc tế.
+          </p>
+          <div class="stat-pill-row">
+            <span class="stat-pill">Nhu cầu nhân lực cao</span>
+            <span class="stat-pill">Thu nhập cạnh tranh</span>
+            <span class="stat-pill">Cơ hội việc làm đa dạng</span>
+          </div>
+        </div>
+        <div class="intro-stack">
+          <figure class="intro-media">
+            <div class="intro-icon-panel" aria-hidden="true">
+              <div class="ip-dot ip-dot-1"></div>
+              <div class="ip-dot ip-dot-2"></div>
+              <div class="ip-grid">
+                <div class="ip-tile ip-tile-code">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"></path><path d="M3 8h18"></path><path d="M5 8v11a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"></path></svg>
+                  <span>Giao tiếp</span>
+                </div>
+                <div class="ip-tile ip-tile-data">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M2 12h20"></path><circle cx="12" cy="12" r="8"></circle></svg>
+                  <span>Kỹ năng toàn cầu</span>
+                </div>
+                <div class="ip-tile ip-tile-ai">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M12 2a15 15 0 0 1 0 20"></path><path d="M12 2a15 15 0 0 0 0 20"></path></svg>
+                  <span>Văn hóa</span>
+                </div>
+                <div class="ip-tile ip-tile-team">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                  <span>Làm việc nhóm</span>
+                </div>
+              </div>
+              <div class="ip-line ip-line-h"></div>
+              <div class="ip-line ip-line-v"></div>
+            </div>
+          </figure>
+          <div class="info-card">
+            <h3>Điểm nổi bật chương trình</h3>
+            <ul>
+              <li>Nền tảng vững chắc về ngữ pháp, nghe, nói, đọc và viết.</li>
+              <li>Đào tạo thực hành giao tiếp, biên - phiên dịch và kỹ năng thuyết trình chuyên nghiệp.</li>
+              <li>Tiếp cận văn hóa quốc tế và môi trường làm việc toàn cầu.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="thesis-strip">
+      <div class="thesis-inner">
+        <p>“Không sợ lỗi thời hay đánh mất vị thế, chỉ sợ chúng ta không biết cách làm mới bản thân và tạo dựng vị thế cho riêng mình.”</p>
+        <span>Định hướng đào tạo ngành Ngôn ngữ Anh tại UTH</span>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="section-inner">
+        <p class="eyebrow">Thế mạnh cốt lõi</p>
+        <h2>Những gì sinh viên sẽ phát triển</h2>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-icon">01</span>
+            <h3>Giao tiếp</h3>
+            <p>Xây dựng sự tự tin trong giao tiếp tiếng Anh hằng ngày và chuyên nghiệp.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon">02</span>
+            <h3>Nhận thức toàn cầu</h3>
+            <p>Am hiểu văn hóa quốc tế, môi trường công sở và hợp tác đa văn hóa.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon">03</span>
+            <h3>Năng lực số</h3>
+            <p>Sử dụng công cụ số để xây dựng bài thuyết trình, nội dung và giao tiếp trực tuyến.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon">04</span>
+            <h3>Sẵn sàng nghề nghiệp</h3>
+            <p>Chuẩn bị hành trang cho các lĩnh vực giáo dục, du lịch, kinh doanh, logistics và đối ngoại.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="program">
+      <div class="section-inner">
+        <p class="eyebrow">Cấu trúc chương trình</p>
+        <h2>Các mảng kiến thức trong chương trình đào tạo</h2>
+        <div class="program-grid">
+          <article class="program-card">
+            <div class="icon-box">🗣️</div>
+            <h3>Giao tiếp tiếng Anh</h3>
+            <p>Tập trung vào nghe, nói, phát âm, kỹ năng thuyết trình và làm việc nhóm bằng tiếng Anh.</p>
+          </article>
+          <article class="program-card">
+            <div class="icon-box">📘</div>
+            <h3>Tiếng Anh chuyên ngành</h3>
+            <p>Đào tạo giao tiếp thương mại, văn bản chuyên nghiệp, đàm phán và tương tác trong công việc.</p>
+          </article>
+          <article class="program-card">
+            <div class="icon-box">🌐</div>
+            <h3>Biên - phiên dịch</h3>
+            <p>Phát triển kỹ năng thực hành dịch thuật văn bản và giao tiếp liên ngôn ngữ.</p>
+          </article>
+          <article class="program-card">
+            <div class="icon-box">💡</div>
+            <h3>Văn hóa & nghiên cứu toàn cầu</h3>
+            <p>Khám phá giao tiếp quốc tế, đa dạng văn hóa và tinh thần công dân toàn cầu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="career">
+      <div class="section-inner">
+        <p class="eyebrow">Định hướng nghề nghiệp</p>
+        <h2>Cơ hội việc làm sau khi tốt nghiệp</h2>
+        <div class="career-grid">
+          <article class="career-card">
+            <h3>Giáo viên tiếng Anh</h3>
+            <p>Giảng dạy tại trường học, trung tâm ngoại ngữ, trường đại học và các cơ sở đào tạo.</p>
+          </article>
+          <article class="career-card">
+            <h3>Nhân viên xuất nhập khẩu & kinh doanh quốc tế</h3>
+            <p>Làm việc tại doanh nghiệp trong nước, công ty đa quốc gia và tập đoàn nước ngoài.</p>
+          </article>
+          <article class="career-card">
+            <h3>Biên - phiên dịch viên</h3>
+            <p>Phục vụ trong lĩnh vực logistics, du lịch, thương mại và giao tiếp doanh nghiệp.</p>
+          </article>
+          <article class="career-card">
+            <h3>Trợ lý đối ngoại & quan hệ quốc tế</h3>
+            <p>Đóng góp vào công tác hợp tác, tổ chức sự kiện, truyền thông và các chương trình toàn cầu.</p>
+          </article>
+        </div>
+        <div class="highlight-box" style="margin-top: 32px;">
+          <h3>Kỹ năng ngôn ngữ cho tương lai</h3>
+          <p>
+            Tiếng Anh là một trong những công cụ giá trị nhất để chủ động tham gia vào nền kinh tế toàn cầu. Tại UTH, chương trình đào tạo trang bị cho sinh viên hành trang trở thành <span class="highlight-strong">những cử nhân linh hoạt, chuyên nghiệp và mang tư duy quốc tế</span>, sẵn sàng dẫn dắt trong một thế giới không ngừng thay đổi.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="campus uth-bg" id="campus">
+      <div class="campus-inner">
+        <div class="school-info">
+          <img src="../Logo_UTH.png" alt="Logo UTH">
+          <h2>Trường Đại học Giao thông vận tải TP.HCM</h2>
+          <ul>
+            <li><strong>Cơ sở chính:</strong> 2 Võ Oanh, Phường Thạnh Mỹ Tây, TP.HCM</li>
+            <li><strong>Tuyển sinh:</strong> 028 3512 8986</li>
+            <li><strong>Văn phòng:</strong> 028 3899 1373</li>
+            <li><strong>Email:</strong> ut-hcmc@ut.edu.vn</li>
+          </ul>
+        </div>
+
+        <div class="campus-list">
+          <p class="eyebrow">Các cơ sở đào tạo</p>
+          <h2>Vị trí các cơ sở</h2>
+          <div class="campus-grid">
+            <article>
+              <h3>Cơ sở An Khánh</h3>
+              <p>10 Đường số 12, Phường An Khánh, TP. Thủ Đức, TP.HCM</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Cơ sở Quận 12</h3>
+              <p>70 Tô Ký, Phường Trung Mỹ Tây, Quận 12, TP.HCM</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Cơ sở Vũng Tàu</h3>
+              <p>17 Đường 3/2, Phường Phước Thắng, TP. Vũng Tàu</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Cơ sở Đồng Nai</h3>
+              <p>Xã Bình An, Huyện Long Thành, Tỉnh Đồng Nai</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Bản quyền 2026 Trường Đại học Giao thông vận tải TP.HCM - UTH</p>
+    <div class="footer-social" aria-label="Mạng xã hội">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">◎</a>
+      <a href="#" aria-label="Twitter">t</a>
+      <a href="#" aria-label="LinkedIn">in</a>
+    </div>
+    <a class="back-to-top" href="#hero" aria-label="Về đầu trang">
+      <svg class="btt-progress" viewBox="0 0 60 60" aria-hidden="true">
+        <circle class="btt-progress-track" cx="30" cy="30" r="27"></circle>
+        <circle class="btt-progress-bar" cx="30" cy="30" r="27"></circle>
+      </svg>
+      <svg class="btt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 15 12 9 18 15"></polyline>
+        <polyline points="6 11 12 5 18 11"></polyline>
+      </svg>
+      <span class="btt-blob" aria-hidden="true"></span>
+    </a>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
