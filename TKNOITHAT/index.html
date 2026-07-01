@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngành Thiết kế nội thất - UTH</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .icon-container {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .icon-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .icon-spin {
+      animation: spin 8s linear infinite;
+    }
+
+    .icon-pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 32px;
+    }
+
+    .reason-card {
+      background: var(--paper);
+      padding: 28px;
+      border-radius: 12px;
+      border-top: 4px solid var(--uth-orange);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 107, 104, 0.12);
+    }
+
+    .reason-card .icon-container {
+      color: var(--uth-teal);
+    }
+
+    .reason-card h3 {
+      color: var(--uth-teal-dark);
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 0;
+    }
+
+    .reason-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .sea-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .sea-card {
+      background: linear-gradient(135deg, #e6f4f3 0%, #fff 100%);
+      padding: 32px 24px;
+      border-radius: 12px;
+      border-left: 4px solid var(--uth-teal);
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .sea-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 107, 104, 0.15);
+    }
+
+    .sea-card .icon-container {
+      color: var(--uth-orange);
+      font-size: 2.5rem;
+    }
+
+    .sea-card h3 {
+      color: var(--uth-teal);
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+      margin-top: 12px;
+    }
+
+    .sea-card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .jobs-section {
+      margin-top: 48px;
+    }
+
+    .job-category {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: var(--soft);
+      border-radius: 8px;
+      border-top: 3px solid var(--uth-orange);
+    }
+
+    .job-category h3 {
+      color: var(--uth-teal-dark);
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+    }
+
+    .job-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .job-item {
+      background: var(--paper);
+      padding: 12px 16px;
+      border-radius: 6px;
+      border-left: 3px solid var(--uth-orange);
+      color: var(--ink);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .job-item::before {
+      content: '→';
+      color: var(--uth-orange);
+      font-weight: bold;
+      min-width: 16px;
+    }
+
+    .highlight-box {
+      background: #ffffff;
+      color: var(--ink);
+      padding: 48px;
+      border-radius: 12px;
+      margin-top: 48px;
+      text-align: center;
+      border: 2px solid var(--uth-teal);
+      box-shadow: 0 8px 24px rgba(0, 107, 104, 0.1);
+    }
+
+    .highlight-box h3 {
+      font-size: 1.8rem;
+      margin: 0 0 20px 0;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--uth-teal-dark);
+    }
+
+    .highlight-box p {
+      line-height: 1.9;
+      font-size: 1.1rem;
+      margin: 0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.3px;
+      color: var(--muted);
+    }
+
+    .highlight-strong {
+      font-weight: 700;
+      color: var(--uth-teal);
+      background: #e6f4f3;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .quote-section {
+      margin: 40px 0;
+      padding: 24px;
+      border-left: 4px solid var(--uth-orange);
+      background: #fff9f4;
+      border-radius: 8px;
+    }
+
+    .quote-section p {
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .main-nav a {
+      position: relative;
+      padding-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--uth-teal);
+      transition: width 0.3s ease;
+    }
+
+    .main-nav a:hover::after,
+    .main-nav a.active::after {
+      width: 100%;
+    }
+
+    .main-nav a.active {
+      color: var(--uth-teal);
+      font-weight: 600;
+    }
+
+    .section::before {
+      content: '';
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .icon-container {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <p><span class="bell-icon" aria-hidden="true"></span> Chào mừng đến với Trường Đại học Giao thông Vận tải TP.HCM - UTH</p>
+    <div class="top-actions">
+      <div class="top-contact">
+        <span><span class="top-icon">☎</span> 028 3512 8986</span>
+        <span><span class="top-icon">✉</span> ut-hcmc@ut.edu.vn</span>
+      </div>
+      <div class="social-links" aria-label="Mạng xã hội">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="TikTok">♪</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#hero" aria-label="Trường Đại học Giao thông Vận tải TP.HCM">
+      <img src="../Logo_UTH.png" alt="Logo UTH">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Giới thiệu</a>
+      <a href="https://uttest.ut.edu.vn/tuyen-sinh" class="active">Tuyển sinh</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Đào tạo</a>
+      <a href="https://uttest.ut.edu.vn/khoa-hoc-cong-nghe">Khoa học - Công nghệ</a>
+      <a href="https://uttest.ut.edu.vn/hop-tac-quoc-te">Hợp tác quốc tế</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Quản trị đại học</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Ban chuyên môn</a>
+    </nav>
+    <button class="menu-button" type="button" aria-label="Mở menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="header-tools">
+      <button class="search-button" type="button" aria-label="Tìm kiếm"></button>
+      <div class="language-switch" aria-label="Chọn ngôn ngữ">
+        <a class="active" href="#">VN</a>
+        <a href="#">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero uth-bg" id="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Trường Kiến trúc</p>
+        <h1>Ngành Thiết kế nội thất</h1>
+        <p class="hero-lead">
+          Kiến tạo không gian từ nghệ thuật và kỹ thuật ứng dụng.
+          Con người không chỉ cần một nơi để ở mà còn mong muốn sở hữu những không gian sống tiện nghi, 
+          thẩm mỹ và thể hiện dấu ấn cá nhân.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#programs">Xem chương trình</a>
+          <a class="secondary-action" href="#career">Cơ hội việc làm</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <article>
+          <strong>4 năm</strong>
+          <span>Thời gian đào tạo</span>
+        </article>
+        <article>
+          <strong>Cử nhân</strong>
+          <span>Bằng cấp</span>
+        </article>
+        <article>
+          <strong>Sáng tạo & Ứng dụng</strong>
+          <span>Định hướng học tập</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section intro-section" id="overview">
+      <div class="section-inner">
+        <p class="eyebrow">Về chương trình</p>
+        <h2>Thiết kế nội thất tại UTH</h2>
+        <p style="font-size: 1.05rem; color: var(--muted); margin-bottom: 24px;">
+          Chuyên ngành Thiết kế nội thất được xây dựng theo định hướng hiện đại, thực tiễn và giàu tính ứng dụng, 
+          giúp sinh viên từng bước trở thành những nhà thiết kế chuyên nghiệp trong thời đại công nghệ số.
+        </p>
+
+        <div class="quote-section">
+          <p>
+            ✨ <strong>Khi không gian sống trở thành "ngôn ngữ" của thời đại</strong> – Sự phát triển mạnh mẽ của đô thị, 
+            bất động sản, khách sạn, trung tâm thương mại hay mô hình nhà ở thông minh đã mở ra nhu cầu rất lớn 
+            về nguồn nhân lực thiết kế nội thất chất lượng cao.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="section-inner">
+        <p class="eyebrow">Tại sao chọn Thiết kế nội thất?</p>
+        <h2>Những lý do nên chọn ngành</h2>
+        
+        <div class="reason-grid">
+          <div class="reason-card">
+            <div class="icon-container icon-float">🎨</div>
+            <h3>Lĩnh vực sáng tạo giàu tiềm năng</h3>
+            <p>
+              Thiết kế nội thất không đơn thuần là trang trí, mà là sự kết hợp giữa nghệ thuật, công năng và công nghệ 
+              để tạo nên những không gian sống tối ưu, truyền cảm hứng và nâng cao chất lượng cuộc sống.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="icon-container icon-pulse">📈</div>
+            <h3>Nhu cầu nhân lực cao</h3>
+            <p>
+              Thị trường thiết kế nội thất tại Việt Nam đang tăng trưởng mạnh cùng với tốc độ phát triển của ngành 
+              xây dựng và bất động sản. Đây là lĩnh vực có nhu cầu tuyển dụng cao với mức thu nhập hấp dẫn.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="icon-container icon-float">🏠</div>
+            <h3>Đa dạng ứng dụng</h3>
+            <p>
+              Từ căn hộ hiện đại, quán cà phê phong cách, văn phòng sáng tạo đến các khu nghỉ dưỡng cao cấp – 
+              tất cả đều cần bàn tay của những nhà thiết kế nội thất có tư duy thẩm mỹ chuyên nghiệp.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="icon-container icon-spin">✨</div>
+            <h3>Khơi nguồn sáng tạo & kết nối</h3>
+            <p>
+              Môi trường học tập năng động tại UTH với giảng viên kinh nghiệm, phòng máy hiện đại, mạng lưới 
+              doanh nghiệp rộng khắp và cơ hội tham gia cuộc thi, dự án cộng đồng.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="programs">
+      <div class="section-inner">
+        <p class="eyebrow">Kiến thức và kỹ năng cốt lõi</p>
+        <h2>Sinh viên được trang bị</h2>
+        
+        <div class="sea-grid">
+          <div class="sea-card">
+            <div class="icon-container icon-float">🎨</div>
+            <h3>Mỹ thuật & Thiết kế</h3>
+            <p>
+              Nền tảng kiến thức toàn diện từ mỹ thuật cơ bản, nguyên lý thiết kế đến tư duy sáng tạo 
+              và tổ chức không gian khoa học cho các loại không gian khác nhau.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <div class="icon-container icon-spin">💻</div>
+            <h3>Phần mềm chuyên nghiệp</h3>
+            <p>
+              Sử dụng thành thạo AutoCAD, SketchUp, Revit, Lumion, Photoshop cùng các công nghệ thiết kế 
+              hiện đại khác để triển khai dự án thực tế với chất lượng cao.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <div class="icon-container icon-pulse">🚀</div>
+            <h3>Công nghệ số & 3D</h3>
+            <p>
+              Ứng dụng công nghệ số, mô phỏng 3D, BIM (Building Information Modeling) và thực tế ảo (VR) 
+              trong thiết kế để visualize và tối ưu hóa dự án trước khi thi công.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <div class="icon-container icon-float">🌿</div>
+            <h3>Thiết kế bền vững</h3>
+            <p>
+              Kiến thức về vật liệu xanh, thiết kế bền vững và lấy con người làm trung tâm để tạo ra những 
+              không gian vừa đẹp, vừa lành mạnh, vừa thân thiện với môi trường.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="career">
+      <div class="section-inner">
+        <p class="eyebrow">Tương lai sáng</p>
+        <h2>Cơ hội nghề nghiệp rộng mở</h2>
+        
+        <p style="font-size: 1.05rem; color: var(--muted); margin-bottom: 32px;">
+          Sau khi tốt nghiệp ngành Thiết kế nội thất tại UTH, sinh viên có thể làm việc tại nhiều lĩnh vực 
+          đang phát triển mạnh của ngành thiết kế và xây dựng Việt Nam.
+        </p>
+
+        <div class="jobs-section">
+          <div class="job-category">
+            <h3>🏢 Lĩnh vực Thiết kế & Kiến trúc</h3>
+            <div class="job-list">
+              <div class="job-item">Công ty tư vấn thiết kế kiến trúc</div>
+              <div class="job-item">Studio thiết kế sáng tạo</div>
+              <div class="job-item">Doanh nghiệp xây dựng, thi công nội thất</div>
+              <div class="job-item">Nhà thầu nội thất cao cấp</div>
+              <div class="job-item">Văn phòng thiết kế độc lập</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>🏨 Lĩnh vực Bất động sản & Hospitality</h3>
+            <div class="job-list">
+              <div class="job-item">Tập đoàn bất động sản</div>
+              <div class="job-item">Khách sạn, resort cao cấp</div>
+              <div class="job-item">Trung tâm thương mại, mall</div>
+              <div class="job-item">Đơn vị phát triển dự án bất động sản</div>
+              <div class="job-item">Quản lý tài sản & phục vụ khách hàng</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>✨ Lĩnh vực Khởi nghiệp & Tự do</h3>
+            <div class="job-list">
+              <div class="job-item">Hoạt động freelancer độc lập</div>
+              <div class="job-item">Khởi nghiệp thương hiệu thiết kế riêng</div>
+              <div class="job-item">Tham gia dự án thiết kế quốc tế</div>
+              <div class="job-item">Thiết kế nội thất online & consultancy</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>📚 Lĩnh vực Giáo dục & Nghiên cứu</h3>
+            <div class="job-list">
+              <div class="job-item">Giảng viên, nhà nghiên cứu</div>
+              <div class="job-item">Tiếp tục học nâng cao trong nước</div>
+              <div class="job-item">Du học các nước phát triển</div>
+              <div class="job-item">Cư nhân kỹ sư, thạc sĩ, tiến sĩ</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h3>Khẳng định cá tính – Kiến tạo giá trị sống</h3>
+          <p>
+            Thiết kế nội thất không chỉ là nghề nghiệp, mà còn là hành trình tạo nên những không gian mang <span class="highlight-strong">dấu ấn con người</span> 
+            và <span class="highlight-strong">tinh thần thời đại</span>. Nếu bạn yêu thích <span class="highlight-strong">sáng tạo</span>, 
+            đam mê <span class="highlight-strong">nghệ thuật ứng dụng</span> và mong muốn kiến tạo những <span class="highlight-strong">giá trị thẩm mỹ bền vững</span> 
+            cho cộng đồng, ngành Thiết kế nội thất tại UTH chính là lựa chọn để bạn tự tin chạm tới tương lai.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="campus uth-bg" id="campus">
+      <div class="campus-inner">
+        <div class="school-info">
+          <img src="../Logo_UTH.png" alt="Logo UTH">
+          <h2>Trường Đại học Giao thông Vận tải TP.HCM</h2>
+          <ul>
+            <li><strong>Cơ sở 1:</strong> Số 2, đường Võ Oanh, P. Thạnh Mỹ Tây, TP. HCM</li>
+            <li><strong>Tuyển sinh:</strong> 028 3512 8986</li>
+            <li><strong>Văn thư:</strong> 028 3899 1373</li>
+            <li><strong>Phòng Đào tạo:</strong> 0283 899 2862</li>
+            <li><strong>Email:</strong> ut-hcmc@ut.edu.vn</li>
+          </ul>
+        </div>
+
+        <div class="campus-list">
+          <p class="eyebrow">Các cơ sở đào tạo</p>
+          <h2>Các cơ sở đào tạo</h2>
+          <div class="campus-grid">
+            <article>
+              <h3>Giảng đường An Khánh</h3>
+              <p>Số 10, Đường số 12, P. An Khánh, TP. Thủ Đức, TP.HCM</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Giảng đường Quận 12</h3>
+              <p>Số 70, Đường Tô Ký, P. Trung Mỹ Tây, Quận 12, TP.HCM</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Giảng đường Vũng Tàu</h3>
+              <p>Số 17, Đường 3 tháng 2, P. Phước Thắng, TP. Vũng Tàu</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Cơ sở 2 - Đồng Nai</h3>
+              <p>Xã Bình An, Huyện Long Thành, Tỉnh Đồng Nai</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Copyright 2026 Trường Đại học Giao thông Vận tải TP.HCM - UTH</p>
+    <div class="footer-social" aria-label="Mạng xã hội">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">◎</a>
+      <a href="#" aria-label="Twitter">t</a>
+      <a href="#" aria-label="LinkedIn">in</a>
+    </div>
+    <a class="back-to-top" href="#hero" aria-label="Lên đầu trang">
+    <svg class="btt-progress" viewBox="0 0 60 60" aria-hidden="true">
+      <circle class="btt-progress-track" cx="30" cy="30" r="27"></circle>
+      <circle class="btt-progress-bar" cx="30" cy="30" r="27"></circle>
+    </svg>
+    <svg class="btt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 15 12 9 18 15"></polyline>
+      <polyline points="6 11 12 5 18 11"></polyline>
+    </svg>
+    <span class="btt-blob" aria-hidden="true"></span>
+  </a>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

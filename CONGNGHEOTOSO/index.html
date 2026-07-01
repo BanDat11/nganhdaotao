@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngành Công nghệ ô tô số - UTH</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes drive {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(8px); }
+    }
+
+    .icon-container {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .icon-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .icon-spin {
+      animation: spin 8s linear infinite;
+    }
+
+    .icon-pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .icon-drive {
+      animation: drive 2.5s ease-in-out infinite;
+    }
+
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 32px;
+    }
+
+    .reason-card {
+      background: var(--paper);
+      padding: 28px;
+      border-radius: 12px;
+      border-top: 4px solid var(--uth-orange);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 107, 104, 0.12);
+    }
+
+    .reason-card .icon-container {
+      color: var(--uth-teal);
+    }
+
+    .reason-card h3 {
+      color: var(--uth-teal-dark);
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 0;
+    }
+
+    .reason-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .sea-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .sea-card {
+      background: linear-gradient(135deg, #e6f4f3 0%, #fff 100%);
+      padding: 32px 24px;
+      border-radius: 12px;
+      border-left: 4px solid var(--uth-teal);
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .sea-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 107, 104, 0.15);
+    }
+
+    .sea-card .icon-container {
+      color: var(--uth-orange);
+      font-size: 2.5rem;
+    }
+
+    .sea-card h3 {
+      color: var(--uth-teal);
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+      margin-top: 12px;
+    }
+
+    .sea-card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .jobs-section {
+      margin-top: 48px;
+    }
+
+    .job-category {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: var(--soft);
+      border-radius: 8px;
+      border-top: 3px solid var(--uth-orange);
+    }
+
+    .job-category h3 {
+      color: var(--uth-teal-dark);
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+    }
+
+    .job-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .job-item {
+      background: var(--paper);
+      padding: 12px 16px;
+      border-radius: 6px;
+      border-left: 3px solid var(--uth-orange);
+      color: var(--ink);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .job-item::before {
+      content: '→';
+      color: var(--uth-orange);
+      font-weight: bold;
+      min-width: 16px;
+    }
+
+    .highlight-box {
+      background: #ffffff;
+      color: var(--ink);
+      padding: 48px;
+      border-radius: 12px;
+      margin-top: 48px;
+      text-align: center;
+      border: 2px solid var(--uth-teal);
+      box-shadow: 0 8px 24px rgba(0, 107, 104, 0.1);
+    }
+
+    .highlight-box h3 {
+      font-size: 1.8rem;
+      margin: 0 0 20px 0;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--uth-teal-dark);
+    }
+
+    .highlight-box p {
+      line-height: 1.9;
+      font-size: 1.1rem;
+      margin: 0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.3px;
+      color: var(--muted);
+    }
+
+    .highlight-strong {
+      font-weight: 700;
+      color: var(--uth-teal);
+      background: #e6f4f3;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .quote-section {
+      margin: 40px 0;
+      padding: 24px;
+      border-left: 4px solid var(--uth-orange);
+      background: #fff9f4;
+      border-radius: 8px;
+    }
+
+    .quote-section p {
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .main-nav a {
+      position: relative;
+      padding-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--uth-teal);
+      transition: width 0.3s ease;
+    }
+
+    .main-nav a:hover::after,
+    .main-nav a.active::after {
+      width: 100%;
+    }
+
+    .main-nav a.active {
+      color: var(--uth-teal);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .icon-container {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <p><span class="bell-icon" aria-hidden="true"></span> Chào mừng đến với Trường Đại học Giao thông Vận tải TP.HCM - UTH</p>
+    <div class="top-actions">
+      <div class="top-contact">
+        <span><span class="top-icon">☎</span> 028 3512 8986</span>
+        <span><span class="top-icon">✉</span> ut-hcmc@ut.edu.vn</span>
+      </div>
+      <div class="social-links" aria-label="Mạng xã hội">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="TikTok">♪</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#hero" aria-label="Trường Đại học Giao thông Vận tải TP.HCM">
+      <img src="../Logo_UTH.png" alt="Logo UTH">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Giới thiệu</a>
+      <a href="https://uttest.ut.edu.vn/tuyen-sinh" class="active">Tuyển sinh</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Đào tạo</a>
+      <a href="https://uttest.ut.edu.vn/khoa-hoc-cong-nghe">Khoa học - Công nghệ</a>
+      <a href="https://uttest.ut.edu.vn/hop-tac-quoc-te">Hợp tác quốc tế</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Quản trị đại học</a>
+      <a href="https://uttest.ut.edu.vn/ky-thuat-thiet-ke-vi-mach-va-ai-2#">Ban chuyên môn</a>
+    </nav>
+    <button class="menu-button" type="button" aria-label="Mở menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="header-tools">
+      <button class="search-button" type="button" aria-label="Tìm kiếm"></button>
+      <div class="language-switch" aria-label="Chọn ngôn ngữ">
+        <a class="active" href="#">VN</a>
+        <a href="#">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero uth-bg" id="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Ngành Công nghệ</p>
+        <h1>Công nghệ ô tô số</h1>
+        <p class="hero-lead">
+          Lựa chọn mới cho nguồn nhân lực giao thông thời đại số. Kết hợp công nghệ thông tin và kỹ thuật ô tô 
+          để tạo ra những phương tiện thông minh, an toàn và bền vững.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#programs">Xem chương trình</a>
+          <a class="secondary-action" href="#career">Cơ hội việc làm</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <article>
+          <strong>4 năm</strong>
+          <span>Thời gian đào tạo</span>
+        </article>
+        <article>
+          <strong>Cử nhân</strong>
+          <span>Bằng cấp</span>
+        </article>
+        <article>
+          <strong>Ứng dụng – Thực tiễn</strong>
+          <span>Định hướng học tập</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section intro-section" id="overview">
+      <div class="section-inner">
+        <p class="eyebrow">Về chương trình</p>
+        <h2>Công nghệ ô tô số tại UTH</h2>
+        <p style="font-size: 1.05rem; color: var(--muted); margin-bottom: 24px;">
+          Trong bối cảnh ngành công nghiệp ô tô toàn cầu đang chuyển dịch mạnh mẽ sang hướng số hóa và thông minh hóa, 
+          UTH đã triển khai đào tạo Công nghệ ô tô số, nhằm cung cấp nguồn nhân lực chất lượng cao, đáp ứng nhu cầu phát triển của thị trường.
+        </p>
+
+        <div class="quote-section">
+          <p>
+            🚗 <strong>Lĩnh vực kết hợp giữa công nghệ thông tin và kỹ thuật ô tô</strong> – Tập trung vào việc ứng dụng phần mềm, 
+            hệ thống điện – điện tử và trí tuệ nhân tạo để nâng cao hiệu suất, độ an toàn và khả năng kết nối của phương tiện. 
+            Đây cũng là nền tảng quan trọng trong việc phát triển các dòng xe điện, xe tự hành và hệ thống giao thông thông minh.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="section-inner">
+        <p class="eyebrow">Tại sao chọn ngành này?</p>
+        <h2>Những lý do nên chọn Công nghệ ô tô số</h2>
+        
+        <div class="reason-grid">
+          <div class="reason-card">
+            <div class="icon-container icon-drive">🚗</div>
+            <h3>Ngành công nghiệp đang phát triển mạnh</h3>
+            <p>
+              Ngành ô tô toàn cầu đang chuyển dịch sang số hóa và thông minh hóa. Xu thế này mở ra nhu cầu rất lớn 
+              về nguồn nhân lực có kỹ năng kết hợp giữa IT và kỹ thuật ô tô.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="icon-container icon-pulse">⚙️</div>
+            <h3>Kiến thức liên ngành quý báu</h3>
+            <p>
+              Sinh viên được trang bị nền tảng vững chắc cả về phần mềm lẫn phần cứng, tạo ra những kỹ sư toàn diện 
+              có khả năng thích ứng cao trong thị trường lao động hiện đại.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="icon-container icon-float">🔋</div>
+            <h3>Tương lai xe điện & ô tô tự hành</h3>
+            <p>
+              Công nghệ ô tô số là nền tảng cho phát triển xe điện, xe tự hành và các giải pháp di chuyển thông minh. 
+              Đây là hướng đi tất yếu của thế giới giao thông hiện đại.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="icon-container icon-spin">🤖</div>
+            <h3>Kết hợp lý thuyết & thực hành</h3>
+            <p>
+              UTH chú trọng tăng cường các hoạt động thực hành, thực tập và tham gia dự án thực tế, giúp sinh viên 
+              nâng cao kỹ năng nghề nghiệp và khả năng thích ứng với môi trường làm việc hiện đại.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="programs">
+      <div class="section-inner">
+        <p class="eyebrow">Kiến thức và kỹ năng chuyên sâu</p>
+        <h2>Sinh viên được học</h2>
+        
+        <div class="sea-grid">
+          <div class="sea-card">
+            <div class="icon-container icon-float">📡</div>
+            <h3>Công nghệ cảm biến</h3>
+            <p>
+              Hiểu biết sâu về các loại cảm biến ô tô, cách hoạt động, ứng dụng trong các hệ thống xe hiện đại 
+              như ABS, ESP, hệ thống ADAS và các cảm biến IoT.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <div class="icon-container icon-pulse">⚡</div>
+            <h3>Hệ thống điều khiển điện tử</h3>
+            <p>
+              Các hệ thống điều khiển động cơ, hệ thống truyền động, hệ thống lái, phanh điện tử và các công nghệ 
+              điện – điện tử tiên tiến trên ô tô hiện đại.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <div class="icon-container icon-spin">💻</div>
+            <h3>Lập trình phần mềm nhúng</h3>
+            <p>
+              Lập trình các ứng dụng nhúng cho hệ thống ô tô, làm việc với các vi điều khiển (MCU), FPGA 
+              và các nền tảng lập trình tự động hóa công nghiệp.
+            </p>
+          </div>
+
+          <div class="sea-card">
+            <div class="icon-container icon-float">🤖</div>
+            <h3>AI & Học máy trong ô tô</h3>
+            <p>
+              Ứng dụng trí tuệ nhân tạo và học máy trong vận hành ô tô, hệ thống hỗ trợ lái (ADAS), xe tự hành 
+              và các giải pháp di chuyển thông minh.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="career">
+      <div class="section-inner">
+        <p class="eyebrow">Tương lai vàng</p>
+        <h2>Cơ hội nghề nghiệp phong phú</h2>
+        
+        <p style="font-size: 1.05rem; color: var(--muted); margin-bottom: 32px;">
+          Với nền tảng kiến thức liên ngành, sinh viên tốt nghiệp chương trình Công nghệ ô tô số có nhiều cơ hội việc làm 
+          tại các tập đoàn sản xuất ô tô, xe điện trong và ngoài nước; các công ty công nghệ phát triển hệ thống xe thông minh, 
+          phần mềm nhúng; các đơn vị nghiên cứu, phát triển và các dự án giao thông thông minh.
+        </p>
+
+        <div class="jobs-section">
+          <div class="job-category">
+            <h3>🏭 Lĩnh vực Sản xuất & Ô tô</h3>
+            <div class="job-list">
+              <div class="job-item">Tập đoàn sản xuất ô tô (Việt Nam & quốc tế)</div>
+              <div class="job-item">Nhà sản xuất xe điện</div>
+              <div class="job-item">Công ty cung cấp linh kiện ô tô</div>
+              <div class="job-item">Phòng R&D của các hãng xe lớn</div>
+              <div class="job-item">Nhà thầu phát triển hệ thống ô tô</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>💻 Lĩnh vực Công nghệ & Software</h3>
+            <div class="job-list">
+              <div class="job-item">Công ty phát triển phần mềm nhúm ô tô</div>
+              <div class="job-item">Công ty công nghệ xe tự hành</div>
+              <div class="job-item">Các công ty IoT và đo lường</div>
+              <div class="job-item">Nhà phát triển ứng dụng di động giao thông</div>
+              <div class="job-item">Công ty công nghệ AI và machine learning</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>🚦 Lĩnh vực Giao thông thông minh & Hạ tầng</h3>
+            <div class="job-list">
+              <div class="job-item">Dự án giao thông thông minh (ITS)</div>
+              <div class="job-item">Công ty hạ tầng giao thông</div>
+              <div class="job-item">Sở GTVT, trung tâm quản lý giao thông</div>
+              <div class="job-item">Công ty dịch vụ di chuyển thông minh</div>
+              <div class="job-item">Công ty khởi nghiệp lĩnh vực mobility</div>
+            </div>
+          </div>
+
+          <div class="job-category">
+            <h3>🎓 Lĩnh vực Giáo dục & Nghiên cứu</h3>
+            <div class="job-list">
+              <div class="job-item">Giảng viên, nhà nghiên cứu tại đại học</div>
+              <div class="job-item">Viện nghiên cứu khoa học công nghệ</div>
+              <div class="job-item">Tiếp tục học nâng cao trong nước</div>
+              <div class="job-item">Du học các nước phát triển</div>
+              <div class="job-item">Cử nhân, thạc sĩ, tiến sĩ</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h3>Dẫn dắt tương lai giao thông số</h3>
+          <p>
+            Công nghệ ô tô số không chỉ là ngành học mà còn là sứ mệnh tham gia xây dựng <span class="highlight-strong">tương lai giao thông thông minh, an toàn và bền vững</span>. 
+            Nếu bạn yêu thích <span class="highlight-strong">công nghệ</span>, đam mê <span class="highlight-strong">ô tô hiện đại</span> 
+            và mong muốn trở thành <span class="highlight-strong">kỹ sư toàn diện</span> trong kỷ nguyên số, 
+            ngành Công nghệ ô tô số tại UTH sẽ là nền tảng hoàn hảo cho sự nghiệp rực rỡ của bạn.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="campus uth-bg" id="campus">
+      <div class="campus-inner">
+        <div class="school-info">
+          <img src="../Logo_UTH.png" alt="Logo UTH">
+          <h2>Trường Đại học Giao thông Vận tải TP.HCM</h2>
+          <ul>
+            <li><strong>Cơ sở 1:</strong> Số 2, đường Võ Oanh, P. Thạnh Mỹ Tây, TP. HCM</li>
+            <li><strong>Tuyển sinh:</strong> 028 3512 8986</li>
+            <li><strong>Văn thư:</strong> 028 3899 1373</li>
+            <li><strong>Phòng Đào tạo:</strong> 0283 899 2862</li>
+            <li><strong>Email:</strong> ut-hcmc@ut.edu.vn</li>
+          </ul>
+        </div>
+
+        <div class="campus-list">
+          <p class="eyebrow">Các cơ sở đào tạo</p>
+          <h2>Các cơ sở đào tạo</h2>
+          <div class="campus-grid">
+            <article>
+              <h3>Giảng đường An Khánh</h3>
+              <p>Số 10, Đường số 12, P. An Khánh, TP. Thủ Đức, TP.HCM</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Giảng đường Quận 12</h3>
+              <p>Số 70, Đường Tô Ký, P. Trung Mỹ Tây, Quận 12, TP.HCM</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Giảng đường Vũng Tàu</h3>
+              <p>Số 17, Đường 3 tháng 2, P. Phước Thắng, TP. Vũng Tàu</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+            <article>
+              <h3>Cơ sở 2 - Đồng Nai</h3>
+              <p>Xã Bình An, Huyện Long Thành, Tỉnh Đồng Nai</p>
+              <a href="https://maps.google.com" target="_blank" rel="noreferrer">Xem bản đồ</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Copyright 2026 Trường Đại học Giao thông Vận tải TP.HCM - UTH</p>
+    <div class="footer-social" aria-label="Mạng xã hội">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">◎</a>
+      <a href="#" aria-label="Twitter">t</a>
+      <a href="#" aria-label="LinkedIn">in</a>
+    </div>
+    <a class="back-to-top" href="#hero" aria-label="Lên đầu trang">
+    <svg class="btt-progress" viewBox="0 0 60 60" aria-hidden="true">
+      <circle class="btt-progress-track" cx="30" cy="30" r="27"></circle>
+      <circle class="btt-progress-bar" cx="30" cy="30" r="27"></circle>
+    </svg>
+    <svg class="btt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 15 12 9 18 15"></polyline>
+      <polyline points="6 11 12 5 18 11"></polyline>
+    </svg>
+    <span class="btt-blob" aria-hidden="true"></span>
+  </a>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
