@@ -12,6 +12,9 @@
   --paper: #ffffff;
   --soft: #f4faf9;
   --shadow: 0 16px 38px rgba(0, 83, 81, 0.14);
+  --shadow-lg: 0 24px 56px rgba(0, 83, 81, 0.2);
+  --glow-orange: 0 0 0 6px rgba(255, 159, 28, 0.14);
+  --glow-teal: 0 0 0 6px rgba(0, 107, 104, 0.12);
 }
 
 * {
@@ -70,6 +73,63 @@ html {
   }
 }
 
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+
+@keyframes flowDot {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes statusBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
 body {
   margin: 0;
   color: var(--ink);
@@ -81,6 +141,16 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Visible keyboard focus everywhere on the site */
+a:focus-visible,
+button:focus-visible,
+.tab-button:focus-visible,
+.career-item:focus-visible {
+  outline: 2px solid var(--uth-orange);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 .top-bar {
@@ -146,6 +216,12 @@ a {
 
 .social-links a {
   line-height: 1;
+  transition: transform 0.22s ease, color 0.22s ease;
+}
+
+.social-links a:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .bell-icon {
@@ -182,6 +258,7 @@ a {
   transform: translateX(-50%);
 }
 
+/* --- Site header (sticky, gains a soft shadow once the page scrolls) --- */
 .site-header {
   position: sticky;
   top: 0;
@@ -195,6 +272,11 @@ a {
   background: #ffffff;
   border-bottom: 0;
   box-shadow: none;
+  transition: box-shadow 0.25s ease;
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 8px 24px rgba(0, 83, 81, 0.1);
 }
 
 .brand {
@@ -217,6 +299,7 @@ a {
 }
 
 .main-nav a {
+  position: relative;
   padding: 6px 0;
   border-radius: 6px;
   color: #007878;
@@ -226,9 +309,26 @@ a {
   white-space: nowrap;
 }
 
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: var(--uth-orange);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
 .main-nav a:hover {
   color: var(--uth-orange);
   background: transparent;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  width: 100%;
 }
 
 .header-tools {
@@ -288,6 +388,7 @@ a {
   justify-content: center;
   color: #007878;
   font-weight: 900;
+  transition: color 0.2s ease, background 0.2s ease;
 }
 
 .language-switch a.active {
@@ -295,6 +396,7 @@ a {
   background: #008f8b;
 }
 
+/* --- Mobile menu button: animates into an X when nav is open --- */
 .menu-button {
   display: none;
   width: 44px;
@@ -303,6 +405,7 @@ a {
   border: 1px solid var(--line);
   border-radius: 6px;
   background: #ffffff;
+  cursor: pointer;
 }
 
 .menu-button span {
@@ -310,8 +413,22 @@ a {
   height: 2px;
   margin: 5px 0;
   background: var(--uth-teal);
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
+.menu-button[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-button[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-button[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Shared teal/orange gradient background used by hero, campus, footer --- */
 .uth-bg {
   position: relative;
   overflow: hidden;
@@ -337,6 +454,21 @@ a {
   animation: floatBackground 18s ease-in-out infinite;
 }
 
+/* Subtle dot-grid texture layered on top of every .uth-bg surface site-wide */
+.uth-bg > * {
+  position: relative;
+}
+
+.uth-bg-dots {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1.4px);
+  background-size: 26px 26px;
+  opacity: 0.5;
+}
+
 .hero {
   display: grid;
   min-height: 720px;
@@ -355,6 +487,32 @@ a {
   max-width: 850px;
   align-self: center;
   animation: fadeSlideUp 0.9s ease both;
+}
+
+/* Small pill badge, e.g. faculty/department label above the eyebrow */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  margin-bottom: 16px;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
+.hero-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--uth-orange);
+  border-radius: 50%;
+  animation: statusBlink 1.6s ease-in-out infinite;
 }
 
 .eyebrow {
@@ -380,6 +538,16 @@ h1 {
   font-size: clamp(3rem, 7vw, 6.4rem);
   line-height: 0.98;
   letter-spacing: 0;
+}
+
+/* Optional shimmering gradient treatment for a hero title: add .title-shine */
+.title-shine {
+  background: linear-gradient(90deg, #ffffff, var(--uth-orange), #ffffff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmerText 6s linear infinite;
 }
 
 h2 {
@@ -418,6 +586,7 @@ h3 {
   padding: 12px 18px;
   border-radius: 6px;
   font-weight: 800;
+  transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease, border-color 0.24s ease;
 }
 
 .primary-action {
@@ -425,9 +594,20 @@ h3 {
   background: var(--uth-orange);
 }
 
+.primary-action:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(255, 159, 28, 0.35);
+}
+
 .secondary-action {
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.48);
+}
+
+.secondary-action:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .hero-stats {
@@ -494,6 +674,12 @@ h3 {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Stagger helper: add .stagger to a grid so children fade in one after another */
+.stagger.visible > *:nth-child(2) { transition-delay: 0.08s; }
+.stagger.visible > *:nth-child(3) { transition-delay: 0.16s; }
+.stagger.visible > *:nth-child(4) { transition-delay: 0.24s; }
+.stagger.visible > *:nth-child(5) { transition-delay: 0.32s; }
 
 .split {
   display: grid;
@@ -662,6 +848,66 @@ h3 {
   color: var(--muted);
 }
 
+/* Rounded pill facts, e.g. "Nhu cầu nhân lực cao" chips under intro copy */
+.stat-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.stat-pill {
+  padding: 10px 16px;
+  color: var(--uth-teal-dark);
+  font-size: 0.88rem;
+  font-weight: 700;
+  background: var(--uth-teal-soft);
+  border-radius: 999px;
+}
+
+/* Full-bleed quote / thesis strip: a short mission statement between sections */
+.quote-strip {
+  position: relative;
+  padding: 46px 0;
+  overflow: hidden;
+  background: linear-gradient(120deg, var(--uth-teal-dark), var(--uth-teal));
+}
+
+.quote-strip::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 159, 28, 0.25), transparent 70%);
+}
+
+.quote-strip-inner {
+  position: relative;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.quote-strip-inner p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.32rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.quote-strip-inner span {
+  display: block;
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -740,6 +986,114 @@ h3 {
 .feature-card:hover .feature-icon {
   background: var(--uth-orange);
   transform: rotate(-3deg) scale(1.05);
+}
+
+/* Small circular icon with a dashed orbiting ring, for feature/career cards */
+.icon-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 12px;
+  color: var(--uth-teal-dark);
+  font-size: 1.05rem;
+  background: var(--uth-teal-soft);
+  border-radius: 50%;
+}
+
+.icon-ring::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 1px dashed rgba(255, 159, 28, 0.55);
+  border-radius: 50%;
+  animation: floatIcon 4s ease-in-out infinite;
+}
+
+/* --- Program cards: 2-column feature blocks for curriculum/program areas --- */
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.program-card {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 83, 81, 0.08);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.program-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 36px rgba(0, 83, 81, 0.14);
+}
+
+.program-card .icon-box {
+  display: inline-grid;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 18px;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--uth-teal), var(--uth-orange));
+  border-radius: 10px;
+  font-size: 1.5rem;
+  animation: floatIcon 3.2s ease-in-out infinite;
+}
+
+.program-card h3 {
+  color: var(--uth-teal-dark);
+  margin-bottom: 10px;
+  font-size: 1.12rem;
+}
+
+.program-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Animated connector line placed above a program-grid to suggest a learning path */
+.program-flow {
+  position: relative;
+  height: 4px;
+  margin-top: 24px;
+}
+
+.program-flow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.program-flow .flow-line {
+  animation: dashFlow 3.5s linear infinite;
+}
+
+.program-flow .flow-dot {
+  position: absolute;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  background: var(--uth-orange);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 159, 28, 0.7);
+  animation: flowDot 3.2s linear infinite;
+}
+
+.program-flow .flow-dot:nth-child(2) {
+  background: var(--uth-teal);
+  box-shadow: 0 0 8px rgba(0, 107, 104, 0.6);
+  animation-delay: 1.1s;
+}
+
+.program-flow .flow-dot:nth-child(3) {
+  animation-delay: 2.1s;
 }
 
 .visual-gallery {
@@ -953,6 +1307,92 @@ h3 {
   animation: fadeSlideUp 0.35s ease both;
 }
 
+/* --- Career/job-outcome cards, an alternative to .career-board --- */
+.career-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.career-card {
+  padding: 24px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--uth-orange);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0, 83, 81, 0.07);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.career-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px rgba(0, 83, 81, 0.12);
+}
+
+.career-card h3 {
+  color: var(--uth-teal-dark);
+  margin-bottom: 10px;
+  font-size: 1.02rem;
+}
+
+.career-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Looping marquee of keyword chips, e.g. career pathways or specialisations */
+.marquee {
+  margin-top: 26px;
+  overflow: hidden;
+  padding: 14px 0;
+  background: var(--uth-teal-soft);
+  border-radius: 999px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+  white-space: nowrap;
+  color: var(--uth-teal-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  animation: marqueeScroll 22s linear infinite;
+}
+
+.marquee-track span:nth-child(odd):not(:first-child) {
+  color: var(--uth-orange);
+  font-weight: 400;
+}
+
+/* Callout box for a closing "why this matters" statement at the end of a section */
+.highlight-box {
+  padding: 30px;
+  background: linear-gradient(135deg, var(--uth-teal-soft), #ffffff);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--uth-teal);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.highlight-box h3 {
+  color: var(--uth-teal-dark);
+}
+
+.highlight-box p {
+  margin: 0;
+  color: var(--ink);
+}
+
+.highlight-strong {
+  color: var(--uth-teal-dark);
+  font-weight: 800;
+}
+
 .campus {
   padding: 86px clamp(20px, 5vw, 72px);
   color: #ffffff;
@@ -1080,6 +1520,24 @@ h3 {
   border: 1px solid rgba(255, 255, 255, 0.28);
   font-size: 1.3rem;
   font-weight: 900;
+  transition: transform 0.22s ease, background 0.22s ease;
+}
+
+.footer-social a:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* --- Top scroll-progress bar (optional: add <div class="scroll-progress"></div> right after <body>) --- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--uth-orange), var(--uth-teal));
+  transition: width 0.1s linear;
 }
 
 /* Back-to-top button: white circle, teal double-chevron, soft shadow, gradient blob accent */
@@ -1097,7 +1555,16 @@ h3 {
   background: #ffffff;
   border-radius: 50%;
   box-shadow: 0 10px 26px rgba(0, 83, 81, 0.22);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .btt-progress {
@@ -1165,6 +1632,7 @@ h3 {
 
   .main-nav.open {
     display: flex;
+    animation: fadeSlideUp 0.25s ease both;
   }
 
   .menu-button {
@@ -1178,7 +1646,9 @@ h3 {
   }
 
   .feature-grid,
-  .campus-grid {
+  .campus-grid,
+  .program-grid,
+  .career-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1199,7 +1669,9 @@ h3 {
   .timeline,
   .feature-grid,
   .campus-grid,
-  .visual-gallery {
+  .visual-gallery,
+  .program-grid,
+  .career-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1230,5 +1702,26 @@ h3 {
   .section,
   .campus {
     padding-inline: 18px;
+  }
+}
+
+/* Respect people who have asked their system to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
