@@ -469,6 +469,75 @@ button:focus-visible,
   opacity: 0.5;
 }
 
+@keyframes waveDrift {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+/* Decorative wave shape: place at the bottom of a .uth-bg hero to curve into the next section */
+.wave-divider-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 1;
+  line-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wave-divider-wrap svg {
+  display: block;
+  width: 100%;
+  height: 70px;
+}
+
+.wave-divider-wrap path {
+  fill: var(--paper);
+}
+
+.wave-divider-wrap.on-soft path {
+  fill: var(--soft);
+}
+
+/* A second, softer wave layer drifting slowly for extra depth (optional, add as sibling) */
+.wave-layer {
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+  z-index: 0;
+  width: 200%;
+  opacity: 0.18;
+  animation: waveDrift 16s linear infinite;
+  pointer-events: none;
+}
+
+/* Small floating mascot icon (boat, plane, building...) for lively hero sections */
+.hero-mascot {
+  position: absolute;
+  z-index: 1;
+  font-size: 3rem;
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.28));
+  animation: bob 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
 .hero {
   display: grid;
   min-height: 720px;
@@ -1105,10 +1174,10 @@ h3 {
 
 .visual-tile {
   position: relative;
-  min-height: 220px;
+  min-height: 240px;
   margin: 0;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 16px;
   box-shadow: 0 14px 30px rgba(0, 83, 81, 0.12);
 }
 
@@ -1116,11 +1185,23 @@ h3 {
 .visual-tile-icon {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  background: linear-gradient(150deg, var(--uth-teal) 0%, var(--uth-teal-dark) 100%);
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 30px 28px;
+  background: linear-gradient(155deg, var(--uth-teal) 0%, var(--uth-teal-dark) 130%);
   transition: transform 0.32s ease, box-shadow 0.32s ease;
+}
+
+.visual-tile-icon::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 70%);
+  pointer-events: none;
 }
 
 .visual-tile-icon:hover {
@@ -1129,43 +1210,64 @@ h3 {
 }
 
 .visual-tile-icon .vt-icon {
+  position: relative;
+  z-index: 1;
   display: inline-grid;
-  width: 76px;
-  height: 76px;
+  width: 60px;
+  height: 60px;
   place-items: center;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: 50%;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
   transition: transform 0.32s ease, background 0.32s ease;
 }
 
 .visual-tile-icon .vt-icon svg {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
 }
 
 .visual-tile-icon:hover .vt-icon {
   transform: scale(1.08) rotate(-4deg);
-  background: rgba(255, 159, 28, 0.85);
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .visual-tile-icon figcaption {
-  position: static;
+  position: relative;
+  z-index: 1;
   color: #ffffff;
   font-weight: 900;
 }
 
+.visual-tile-icon figcaption strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.visual-tile-icon figcaption span {
+  display: block;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
 .vt-data .vt-icon {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .vt-data {
-  background: linear-gradient(150deg, #007878 0%, var(--uth-teal-dark) 100%);
+  background: linear-gradient(155deg, var(--uth-orange) 0%, #b5590a 130%);
 }
 
 .vt-learn {
-  background: linear-gradient(150deg, #04857f 0%, var(--uth-teal-dark) 100%);
+  background: linear-gradient(155deg, #163134 0%, var(--uth-red) 160%);
 }
 
 .intro-media img,
